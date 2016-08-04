@@ -1,0 +1,33 @@
+_repo: Astoria--Or-Anecdotes-of-an-Enterprise-Beyond-the-Rocky-Mountains_1371
+_version: 0.0.1
+creator:
+  author:
+    agent_name: Irving, Washington
+    alias: Crayon, Geoffrey
+    birthdate: 1783
+    deathdate: 1859
+    gutenberg_agent_id: '34'
+    url: http://www.gutenberg.org/2009/agents/34
+    wikipedia: http://en.wikipedia.org/wiki/Washington_Irving
+description: ''
+gutenberg_bookshelf: Western
+gutenberg_issued: '2006-02-19'
+gutenberg_type: Text
+identifiers:
+  gutenberg: '1371'
+language: en
+publisher: Project Gutenberg
+rights: Public domain in the USA.
+rights_url: http://creativecommons.org/about/pdm
+subjects:
+- !lcc 'F850.5'
+- !lcsh 'Voyages to the Pacific coast'
+- !lcsh 'Overland journeys to the Pacific'
+- !lcsh 'Astoria (Or.)'
+- !lcsh 'Pacific Fur Company'
+- !lcc 'PS'
+- !lcsh 'Northwestern States -- Description and travel'
+- !lcsh 'Fur trade -- Oregon'
+- GITenberg
+title: Astoria; Or, Anecdotes of an Enterprise Beyond the Rocky Mountains
+url: http://www.gutenberg.org/ebooks/1371
