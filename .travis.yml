@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: oO5mZicJwOesoGLPwjg0o8TjxrzGH93brRjpGPbtrFVPdFwgmz3Gw77dsWd9FE6ziSjnuhCLfEF9qmqA46L7QlKZgu7/Ofy0+3ZqjniYpkXVj85hIm9lkDVfrwWv7KytWWAFux6IOOCzBX+z3lkzIoqGfWDDHddeiI+ad6klmY2k6EtoJhlzLFinaxoRKthak6pLusKc1zCLUrguSMno0g5igXcHjuggMbon+CuNsBIMaLzU4rYkA9VbQOkJPjCiMJnNC7ZjczoXUN/rrhvYioCw9S5bBC9N9qpXh+4+mGbOETXHnuqO5aFFy7GSDctFT+XeTMczPP3coEBdMF8BKvynnfcTRld8Nv9+HfHTVPXiloJ8itiGJKN3Kld5p5bXpCgp6ca8ZNA2ewNW68kFne//ybKe94uQoZf09Y4tLEPtyOwbseM/Wc9rFVulLFDuyBYITGfckK+AJ8zO+a205IyOs6l0c1/iG4Sz/2oC7X/dBj9ifVU5AgUCNlUrlKwMqyFTclwTNL3R4tRFf8zdoVzbmA6/qB1/qYoFVc7QYx9utr33CeOr/7VrtQtCELSra+Fl88UwIDPu67opXxNpHACh5Fazwut1HLc/vLr1YFHlALZNXQr/IXv7ZIHfnOguFuZ0MIbDjw00VHO0jTxhgOTtgdqlHMrk4wA5jpkVcTo=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Astoria--Or-Anecdotes-of-an-Enterprise-Beyond-the-Rocky-Mountains_1371
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
